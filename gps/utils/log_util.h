@@ -78,35 +78,31 @@ extern char* get_timestamp(char* str, unsigned long buf_size);
 #ifndef DEBUG_DMN_LOC_API
 
 /* LOGGING MACROS */
-#define LOC_LOGE(...) ALOGE("E/" __VA_ARGS__)
+#define LOC_LOGE(...) ALOGE(__VA_ARGS__)
 
 #define LOC_LOGW(...) \
-if (loc_logger.DEBUG_LEVEL >= 2) { ALOGE("W/" __VA_ARGS__); } \
+if (loc_logger.DEBUG_LEVEL >= 2) { ALOGW(__VA_ARGS__); } \
 else if (loc_logger.DEBUG_LEVEL <= 0) { ALOGW("W/" __VA_ARGS__); }
 
 #define LOC_LOGI(...) \
-if (loc_logger.DEBUG_LEVEL >= 3) { ALOGE("I/" __VA_ARGS__); } \
+if (loc_logger.DEBUG_LEVEL >= 3) { ALOGI(__VA_ARGS__); } \
 else if (loc_logger.DEBUG_LEVEL <= 0) { ALOGI("W/" __VA_ARGS__); }
 
 #define LOC_LOGD(...) \
-if (loc_logger.DEBUG_LEVEL >= 4) { ALOGE("D/" __VA_ARGS__); } \
+if (loc_logger.DEBUG_LEVEL >= 4) { ALOGD(__VA_ARGS__); } \
 else if (loc_logger.DEBUG_LEVEL <= 0) { ALOGD("W/" __VA_ARGS__); }
 
 #define LOC_LOGV(...) \
-if (loc_logger.DEBUG_LEVEL >= 5) { ALOGE("V/" __VA_ARGS__); } \
+if (loc_logger.DEBUG_LEVEL >= 5) { ALOGV(__VA_ARGS__); } \
 else if (loc_logger.DEBUG_LEVEL <= 0) { ALOGV("W/" __VA_ARGS__); }
 
 #else /* DEBUG_DMN_LOC_API */
 
-#define LOC_LOGE(...) ALOGE("E/"__VA_ARGS__)
-
-#define LOC_LOGW(...) ALOGW("W/"__VA_ARGS__)
-
-#define LOC_LOGI(...) ALOGI("I/"__VA_ARGS__)
-
-#define LOC_LOGD(...) ALOGD("D/"__VA_ARGS__)
-
-#define LOC_LOGV(...) ALOGV("V/"__VA_ARGS__)
+#define LOC_LOGE(...) ALOGE(__VA_ARGS__)
+#define LOC_LOGW(...) ALOGW(__VA_ARGS__)
+#define LOC_LOGI(...) ALOGI(__VA_ARGS__)
+#define LOC_LOGD(...) ALOGD(__VA_ARGS__)
+#define LOC_LOGV(...) ALOGV(__VA_ARGS__)
 
 #endif /* DEBUG_DMN_LOC_API */
 
@@ -136,11 +132,11 @@ else if (loc_logger.DEBUG_LEVEL <= 0) { ALOGV("W/" __VA_ARGS__); }
 
 
 // Used for logging callflow from Android Framework
-#define ENTRY_LOG_CALLFLOW() LOG_I(FROM_AFW, __func__, %s, "")
+#define ENTRY_LOG_CALLFLOW() LOG_I(FROM_AFW, __FUNCTION__, %s, "")
 // Used for logging callflow to Modem
-#define EXIT_LOG_CALLFLOW(SPEC, VAL) LOG_I(TO_MODEM, __func__, SPEC, VAL)
-// Used for logging callflow from Modem(TO_MODEM, __func__, %s, "")
-#define MODEM_LOG_CALLFLOW(SPEC, VAL) LOG_I(FROM_MODEM, __func__, SPEC, VAL)
+#define EXIT_LOG_CALLFLOW(SPEC, VAL) LOG_I(TO_MODEM, __FUNCTION__, SPEC, VAL)
+// Used for logging callflow from Modem(TO_MODEM, __FUNCTION__, %s, "")
+#define MODEM_LOG_CALLFLOW(SPEC, VAL) LOG_I(FROM_MODEM, __FUNCTION__, SPEC, VAL)
 // Used for logging callflow to Android Framework
 #define CALLBACK_LOG_CALLFLOW(CB, SPEC, VAL) LOG_I(TO_AFW, CB, SPEC, VAL)
 
